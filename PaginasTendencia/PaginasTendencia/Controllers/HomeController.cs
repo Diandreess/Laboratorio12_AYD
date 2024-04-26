@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PaginasTendencia.Models;
 using System.Diagnostics;
+using Persistencia;
 
 namespace PaginasTendencia.Controllers
 {
@@ -15,6 +16,8 @@ namespace PaginasTendencia.Controllers
 
         public IActionResult Index()
         {
+            ConexionBD conexion = new ConexionBD();
+            conexion.ObtenerPagina("Prueba");
             return View();
         }
 

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Persistencia
 {
-    internal class Consultas
+    internal class Instrucciones
     {
-        // Alguna consulta
+        public static string SP_ObtenerPagina = "EXEC [dbo].[ObtenerPagina]";
     }
 }
