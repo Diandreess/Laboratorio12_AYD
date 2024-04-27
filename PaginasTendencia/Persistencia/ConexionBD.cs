@@ -11,7 +11,7 @@ namespace Persistencia
 {
     public class ConexionBD
     {
-        string cadenaConexion = @"Persist Security Info=False;User ID=diego;Password=123456.;Database=BattleRoyale;Server=CAMILA\SQLEXPRESS;TrustServerCertificate=true;";
+        string cadenaConexion = @"Persist Security Info=False;User ID=Admin;Password=hola123;Database=Lab12AYD;Server=LAPTOP-BIKSR615\SQLEXPRESS;TrustServerCertificate=true;";
         
         SqlConnection conexion;
 
@@ -27,25 +27,24 @@ namespace Persistencia
             conexion.Close();
         }
 
-        public Pagina ObtenerPagina(string busqueda)
+        public Pagina ObtenerPagina(string nombrePagina)
         {
             Pagina pagina = new Pagina();
             try
             {
                 Conectar();
 
-                //string instruccion = $"{Instrucciones.SP_ObtenerPagina} {busqueda}";
-                string instruccion = " EXEC Obtenerjugadores";
+                string instruccion = $"{Instrucciones.SP_ObtenerInformacionPagina} {nombrePagina}";
                 SqlDataAdapter adapter = new SqlDataAdapter(instruccion, conexion);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 if (dt.Rows.Count > 0)
                 {
-                    //Todo bien
-                    if (true)
-                    {
-                        //todo bein
-                    }
+                    Pagina respuesta = new Pagina();
+                    respuesta.Titulo = dt.Rows[0]["Titulo"].ToString();
+                    respuesta.FechaPublicacion = dt.Rows[0]["FechaPublicacion"].ToString();
+
+                    return respuesta;
                 }
             }
             catch (Exception)

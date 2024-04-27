@@ -8,6 +8,14 @@ namespace Persistencia
 {
     internal class Instrucciones
     {
-        public static string SP_ObtenerPagina = "EXEC [dbo].[ObtenerPagina]";
+        /// <summary>
+        /// SP para validar el permiso de un usuario basado en servicios.
+        /// </summary>
+        public static string SP_MostrarTendenciasPaginas = "EXEC [dbo].[MostrarTendenciasPagina]";
+
+        /// <summary>
+        /// SP para obtener los detalles de una página
+        /// </summary>
+        public static string SP_ObtenerInformacionPagina = "EXEC [dbo].[ObtenerInformacionPagina]";
     }
 }

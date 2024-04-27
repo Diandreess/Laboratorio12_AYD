@@ -2,6 +2,8 @@
 using PaginasTendencia.Models;
 using System.Diagnostics;
 using Persistencia;
+using ModeloDatos;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PaginasTendencia.Controllers
 {
@@ -9,16 +11,30 @@ namespace PaginasTendencia.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            ConexionBD conexion = new ConexionBD();
-            conexion.ObtenerPagina("Prueba");
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(string campoBusqueda)
+        {
+            ConexionBD conexion = new ConexionBD();
+            Pagina busqueda = conexion.ObtenerPagina($"'{campoBusqueda}'");
+            return RedirectToAction("PaginaVista", busqueda);
+        }
+
+        [HttpGet]
+        public IActionResult PaginaVista(Pagina pagina)
+        {
+            return View(pagina);
         }
 
         public IActionResult Privacy()
